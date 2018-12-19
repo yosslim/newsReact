@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 //Components
 import Header from './Header';
 import News from './News';
+import Formulary from './Formulary';
 
 
 class App extends Component {
@@ -15,9 +16,9 @@ class App extends Component {
     this.getNews();
   }
   
-  getNews = () =>{
-    let url='https://newsapi.org/v2/top-headlines?country=mx&category=general&apiKey=b756eaefcf834623be74149d9d79a3df';
-    console.log(url);
+  getNews = (category='general') =>{
+    let url=`https://newsapi.org/v2/top-headlines?country=mx&category=${category}&apiKey=b756eaefcf834623be74149d9d79a3df`;
+    console.log(category);
 
     fetch(url)
     .then(respuesta => {
@@ -39,6 +40,9 @@ class App extends Component {
         />
      
         <div className="contenedor white contenedor-noticias">
+          <Formulary
+            getNews = {this.getNews}
+          />
           <News 
           news={this.state.news}
           />
